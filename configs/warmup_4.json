@@ -1,0 +1,13 @@
+{
+  "warmup": 4,
+  "kappa": 1.0,
+  "buffer_size": 30,
+  "k_neighbors": 2,
+  "comparison_distance": "diameter",
+  "smart_forgetting": "plain",
+  "neighborhood_merge": "disabled",
+  "singleton_merge": "disabled",
+  "stream_seed": 0,
+  "stream_n": 12,
+  "stream_dim": 2
+}

@@ -1,0 +1,13 @@
+[project]
+name = "ared-warmup"
+version = "0.1.0"
+description = "Warm-start A/RED with a JSON-configured far-point pool"
+requires-python = ">=3.11"
+dependencies = ["numpy"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
