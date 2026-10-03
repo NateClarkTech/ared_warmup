@@ -1,0 +1,25 @@
+# Full NICE grid. nice_base scales the vendored 500_000 // 2**i schedule.
+# Set nice_base: 0 to call the vendored generator (~1e6 points). That is not
+# a CPU-minute run. This file keeps the class family and the rarest-n rule.
+data: NICE
+nice_base: 500
+nice_min_count: 20
+methods:
+  - cold_ared
+  - random_then_ared
+  - farpoint_then_ared
+  - oracle_then_ared
+streams:
+  - stationary
+  - late_arrival
+t_fracs: [0.10, 0.20]
+B0s: [20, 50, 100]
+kappas: [0.5, 1.0, 1.5]
+l_buf_sizes: [1000, 200]
+n_rel_classes: [4]
+seeds: [0, 1, 2, 3, 4]
+query_rule: global_fft
+qs_var: 1
+k_comp_pts: 2
+smart_forgetting: [3, 0.01]
+out: results/nice_matrix

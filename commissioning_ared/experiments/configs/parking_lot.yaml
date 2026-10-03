@@ -1,0 +1,26 @@
+# PARKING_LOT_DINO matrix. Requires the 16-d latent cache; DINOv2 runs only
+# when that cache is missing and source images are already on disk.
+# Kappa 0.5 is the streaming default for this representation. 0.25 and 1.0
+# are the lower and higher settings. Buffers: 10000 (no forgetting on a
+# few-thousand-point stream) and 500 (forgetting is visible).
+# Relevant classes: 6 rarest, and 8 rarest.
+data: PARKING_LOT_DINO
+methods:
+  - cold_ared
+  - random_then_ared
+  - farpoint_then_ared
+  - oracle_then_ared
+streams:
+  - stationary
+  - late_arrival
+t_fracs: [0.10, 0.20]
+B0s: [20, 50, 100]
+kappas: [0.25, 0.5, 1.0]
+l_buf_sizes: [10000, 500]
+n_rel_classes: [6, 8]
+seeds: [0, 1, 2, 3, 4]
+query_rule: global_fft
+qs_var: 1
+k_comp_pts: 2
+smart_forgetting: [3, 0.01]
+out: results/parking_lot

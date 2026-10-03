@@ -1,0 +1,39 @@
+[
+
+  {
+    "DATA_SOURCE": "EMNIST",
+    "N_REL_CLASSES": 3,
+    "KAPPA": 1.4,
+    "QS_VAR": 0,
+    "SM_VAR": 0,
+    "REL_PROC_VAR": 0,
+    "K_COMP_PTS": 1,
+    "NGHBHOOD_MERGE": true,
+    "SINGLETON_MERGE": true,
+    "DATA_WINDOW_SIZE": 100,
+    "NUM_POINTS_TO_PROCESS": -1,
+    "GRAPH_BATCH_SIZE": 1000,
+    "VERBOSE_FLAGS": [0],
+    "MAKE_GRAPHS": false,
+    "MAKE_EVO_GRAPHS": false,
+    "RANDOM_SEED_OFFSET": 30
+  },
+  {
+    "DATA_SOURCE": "NICE",
+    "N_REL_CLASSES": 4,
+    "KAPPA": 0.5,
+    "QS_VAR": 0,
+    "SM_VAR": 0,
+    "REL_PROC_VAR": 0,
+    "K_COMP_PTS": 2,
+    "NGHBHOOD_MERGE": true,
+    "SINGLETON_MERGE": true,
+    "DATA_WINDOW_SIZE": 150,
+    "NUM_POINTS_TO_PROCESS": -1,
+    "GRAPH_BATCH_SIZE": 500,
+    "VERBOSE_FLAGS": [0],
+    "MAKE_GRAPHS": false,
+    "MAKE_EVO_GRAPHS": false,
+    "RANDOM_SEED_OFFSET": 35
+  }
+]
