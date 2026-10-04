@@ -1,5 +1,5 @@
-"""Warm-start A/RED: a far-point pool, then a streaming detector."""
+"""Warm start: a far-point pool, then the A/RED algorithm in ``ared/ared.py``."""
 
-from ared.algorithm import run
+from ared.warm_start import run
 
 __all__ = ["run"]

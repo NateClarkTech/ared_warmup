@@ -1,4 +1,4 @@
-"""Streaming A/RED. Variant math lives in the strategy folders this class calls."""
+"""The A/RED algorithm. Variant math lives in the strategy folders this class calls."""
 
 from __future__ import annotations
 
@@ -155,7 +155,7 @@ def should_query(distance: float, kappa: float, comparison_distance: float, near
     return bool(nearby_relevant) or float(distance) * float(kappa) > float(comparison_distance)
 
 
-class Detector:
+class ARED:
     def __init__(self, points, labels, relevance, kappa, buffer_size, k_neighbors, comparison, forgetting, neighborhood, singleton):
         self.points = np.asarray(points, dtype=np.float64)
         self.labels = [str(value) for value in labels]
@@ -169,7 +169,7 @@ class Detector:
         self.buffer = Buffer(buffer_size, forgetting)
 
     @classmethod
-    def from_config(cls, config, points, labels, relevance) -> "Detector":
+    def from_config(cls, config, points, labels, relevance) -> "ARED":
         return cls(
             points,
             labels,

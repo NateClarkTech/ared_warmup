@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import sys
 
-from ared.algorithm import format_result, run
+from ared.warm_start import format_result, run
 from ared.config import ConfigError
 
 

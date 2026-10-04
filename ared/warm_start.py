@@ -1,7 +1,7 @@
-"""Warm-start A/RED.
+"""Warm start around the A/RED algorithm in ``ared/ared.py``.
 
 Load the chosen config, take the warm-up prefix, query that prefix farthest-first,
-seed the detector with those labels, then stream every later point.
+seed A/RED with those labels, then stream every later point through A/RED.
 """
 
 from __future__ import annotations
@@ -11,7 +11,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from ared.config import load_config
-from ared.detector import Detector
+from ared.ared import ARED
 from ared.far_point import far_point_indices
 from ared.stream import synthetic_stream
 
@@ -31,12 +31,12 @@ def run(config_name, stdin=None, points=None, labels=None, relevance=None) -> Re
     prefix = points[: config.warmup]
     far_indices = far_point_indices(prefix)
 
-    detector = Detector.from_config(config, points, labels, relevance)
-    detector.seed(far_indices)
+    ared = ARED.from_config(config, points, labels, relevance)
+    ared.seed(far_indices)
 
     stream_query_count = 0
     for index in range(config.warmup, len(points)):
-        if detector.stream_point(index):
+        if ared.stream_point(index):
             stream_query_count += 1
 
     return Result(

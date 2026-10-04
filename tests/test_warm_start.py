@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from ared.algorithm import run
+from ared.ared import ARED, ClusterStore, Hit, Memory
 from ared.config import load_config
-from ared.detector import ClusterStore, Detector, Hit, Memory
+from ared.warm_start import run
 from ared.stream import synthetic_stream
 from comparison_distance import build as build_comparison
 from comparison_distance.average_nearest_neighbor import AverageNearestNeighbor
@@ -86,7 +86,7 @@ def _line_stream():
     return points, labels, relevance
 
 
-def test_comparison_distance_strategies_disagree_and_the_config_is_what_the_detector_uses():
+def test_comparison_distance_strategies_disagree_and_the_config_is_what_ared_uses():
     points, labels, relevance = _line_stream()
     pool = points[:3]
     diameter = Diameter().measure(pool)
@@ -120,12 +120,12 @@ def test_nearby_relevant_point_forces_a_query_inside_the_comparison_distance():
     points = np.array([[0.0], [1.0], [1.2]], dtype=np.float64)
     labels = ["a", "a", "b"]
 
-    forced = Detector.from_config(config, points, labels, [True, False, False])
+    forced = ARED.from_config(config, points, labels, [True, False, False])
     forced.remember(points[0], "a", True)
     forced.remember(points[1], "a", False)
     assert forced.stream_point(2) is True
 
-    quiet = Detector.from_config(config, points, labels, [False, False, False])
+    quiet = ARED.from_config(config, points, labels, [False, False, False])
     quiet.remember(points[0], "a", False)
     quiet.remember(points[1], "a", False)
     assert quiet.stream_point(2) is False
@@ -145,10 +145,10 @@ def test_keep_relevant_retains_a_label_plain_forgetting_drops():
     points = np.vstack(vectors)
 
     def retained(config):
-        detector = Detector.from_config(config, points, labels, relevance)
+        model = ARED.from_config(config, points, labels, relevance)
         for vector, label, relevant in zip(vectors, labels, relevance):
-            detector.remember(vector, label, relevant)
-        return detector.buffered_labels()
+            model.remember(vector, label, relevant)
+        return model.buffered_labels()
 
     plain_labels = retained(plain_cfg)
     keep_labels = retained(keep_cfg)
